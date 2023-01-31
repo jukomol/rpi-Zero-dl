@@ -1,0 +1,18 @@
+sudo apt update
+sudo apt upgrade -y
+echo "deb [signed-by=/usr/share/keyrings/coral-edgetpu-archive-keyring.gpg] https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/coral-edgetpu-archive-keyring.gpg >/dev/null
+sudo apt update
+sudo apt install python3-tflite-runtime libatlas-base-dev
+
+---------------------------------->check if it is runnable or not<-----------------------------------------
+python3
+from tflite_runtime.interpreter import Interpreter
+
+---------------------------------->test a model<-----------------------------------------
+sudo apt install git
+git clone https://github.com/tensorflow/examples --depth 1
+cd examples/lite/examples/image_classification/raspberry_pi
+sudo chmod +x setup.sh
+./setup.sh
+python3 classify.py
